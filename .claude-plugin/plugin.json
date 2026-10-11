@@ -2,7 +2,7 @@
   "name": "hawkeye-ai-bridge",
   "displayName": "Hawkeye AI Bridge",
   "description": "Fast local code and asset search for large codebases, Unity and Unreal projects. Engine agnostic. Bridges the Hawkeye desktop search app to Claude using ~85-91% fewer tokens than grep-style search.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": {
     "name": "Zaragsoft",
     "url": "https://www.zaragsoft.se"
@@ -10,5 +10,23 @@
   "homepage": "https://www.zaragsoft.se/aibridge",
   "repository": "https://github.com/Hawkeye-Zaragsoft/hawkeye-claude-plugin",
   "license": "SEE LICENSE IN LICENSE",
-  "keywords": ["search", "code-search", "search", "mcp", "unity", "unreal", "large-codebase", "local", "token-savings", "token-optimizer"]
+  "keywords": ["search", "code-search", "mcp", "unity", "unreal", "large-codebase", "local", "token-savings", "token-optimizer"],
+  "userConfig": {
+    "hawkeye_path": {
+      "type": "string",
+      "title": "Hawkeye executable",
+      "description": "Full path to hawkeye.exe. Change this only if Hawkeye is not installed in C:\\Program Files\\Hawkeye.",
+      "default": "C:\\Program Files\\Hawkeye\\hawkeye.exe"
+    }
+  },
+  "mcpServers": {
+    "hawkeye": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/server/HawkeyeAIBridge.exe",
+      "env": {
+        "HAWKEYE_PATH": "${user_config.hawkeye_path}",
+        "HAWKEYE_SETTINGS_DIR": "${CLAUDE_PLUGIN_DATA}",
+        "HAWKEYE_DISABLE_EDITOR_TOOLS": "1"
+      }
+    }
+  }
 }
