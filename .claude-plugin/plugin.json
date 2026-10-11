@@ -1,0 +1,14 @@
+{
+  "name": "hawkeye-ai-bridge",
+  "displayName": "Hawkeye AI Bridge",
+  "description": "Fast local code and asset search for large codebases, Unity and Unreal projects. Engine agnostic. Bridges the Hawkeye desktop search app to Claude using ~85-91% fewer tokens than grep-style search.",
+  "version": "1.0.6",
+  "author": {
+    "name": "Zaragsoft",
+    "url": "https://www.zaragsoft.se"
+  },
+  "homepage": "https://www.zaragsoft.se/aibridge",
+  "repository": "https://github.com/Hawkeye-Zaragsoft/hawkeye-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": ["search", "code-search", "search", "mcp", "unity", "unreal", "large-codebase", "local", "token-savings", "token-optimizer"]
+}

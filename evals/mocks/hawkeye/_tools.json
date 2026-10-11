@@ -1,0 +1,281 @@
+{
+  "tools": [
+    {
+      "name": "hawkeye_search",
+      "description": "Search the user's Hawkeye-indexed files and return matching files with code snippets. Prefer hawkeye_search_minimal plus hawkeye_expand_context for most lookups; use this when you want the full match text in one call.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          },
+          "groupMasks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional group filters"
+          },
+          "maxResults": {
+            "type": "integer",
+            "description": "Max results (default 20)"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "hawkeye_search_minimal",
+      "description": "Find where something is in the user's Hawkeye-indexed files: code, config, assets or text, in any language or project type (not only Unity/Unreal). Use this instead of grep, Glob or Read for lookups like 'where is X defined', 'who uses Y', 'find the Z handler'. Returns grouped results: each file once with a lines array (token-efficient); pass them to hawkeye_expand_context for the surrounding code. Use hawkeye_get_groups for mask IDs. Try this first even if unsure the files are indexed - an empty result is cheap.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          },
+          "groupMasks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Group mask IDs (e.g. \"12\"), not display names"
+          },
+          "maxResults": {
+            "type": "integer",
+            "description": "Max line hits to return (default 50 from settings)"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "hawkeye_expand_context",
+      "description": "Expand search hits into merged code snippets read from disk. Pass the {file, lines} pairs from hawkeye_search_minimal (or a filtered subset). Nearby hits in the same file are merged into one snippet (default merge gap 8 lines, -2/+5 context). Returns one snippet per cluster per file in a single call - use this instead of reading each hit individually.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "hits": {
+            "type": "array",
+            "description": "Array of {file, lines} objects, e.g. the \"results\" array returned by hawkeye_search_minimal",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "description": "Absolute path to the file"
+                },
+                "lines": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "1-indexed line numbers to expand"
+                }
+              },
+              "required": [
+                "file",
+                "lines"
+              ]
+            }
+          },
+          "contextBefore": {
+            "type": "integer",
+            "description": "Lines of context before each cluster's first hit (default 2)"
+          },
+          "contextAfter": {
+            "type": "integer",
+            "description": "Lines of context after each cluster's last hit (default 5)"
+          },
+          "mergeGap": {
+            "type": "integer",
+            "description": "Merge hits within this many lines of each other into one snippet (default 8)"
+          },
+          "maxTotalLines": {
+            "type": "integer",
+            "description": "Cap on total lines returned across the whole response (default 1000). If exceeded, sets truncated:true and lists cut clusters in truncated_clusters."
+          }
+        },
+        "required": [
+          "hits"
+        ]
+      }
+    },
+    {
+      "name": "hawkeye_get_groups",
+      "description": "Get available search groups from Hawkeye",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "hawkeye_get_editors",
+      "description": "Get available editors configured in Hawkeye",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "hawkeye_execute_editor",
+      "description": "Execute a file in a specified editor with line number support",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "editorPath": {
+            "type": "string",
+            "description": "Path to editor executable"
+          },
+          "filePath": {
+            "type": "string",
+            "description": "Path to file to open"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "description": "Line number to jump to"
+          },
+          "parameters": {
+            "type": "string",
+            "description": "Editor parameters with %FILE% and %LINE% placeholders"
+          }
+        },
+        "required": [
+          "editorPath",
+          "filePath",
+          "lineNumber",
+          "parameters"
+        ]
+      }
+    },
+    {
+      "name": "copy_to_clipboard",
+      "description": "Copy text to system clipboard",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Text to copy to clipboard"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      }
+    },
+    {
+      "name": "hawkeye_health_check",
+      "description": "Check if Hawkeye is running and accessible",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "hawkeye_reload_index",
+      "description": "Trigger a headless Hawkeye index reload (no window, doesn't steal focus). Only call this when the user asks to reload, refresh or rescan the index. Do not call it on your own after a search returns zero or unexpected results - treat that as a normal empty result. Not scoped to a group - reloads the whole index. Returns quickly; the reload itself runs in the background.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "get_settings",
+      "description": "Get all settings from settings.json",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "save_settings",
+      "description": "Save settings to settings.json",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "hawkeyePath": {
+            "type": "string",
+            "description": "Path to hawkeye.exe"
+          },
+          "maxResults": {
+            "type": "integer",
+            "description": "Maximum search results"
+          },
+          "caseSensitive": {
+            "type": "integer",
+            "description": "Case sensitivity (0-2)"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "validate_hawkeye_path",
+      "description": "Validate if the configured Hawkeye installation path exists on disk",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ]
+}

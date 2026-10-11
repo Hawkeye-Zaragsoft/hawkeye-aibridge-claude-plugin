@@ -1,0 +1,15 @@
+{
+  "name": "hawkeye",
+  "owner": {
+    "name": "Zaragsoft",
+    "url": "https://www.zaragsoft.se"
+  },
+  "plugins": [
+    {
+      "name": "hawkeye-ai-bridge",
+      "source": "./",
+      "description": "Fast local code and asset search for large codebases, but also Unity and Unreal projects, engine agnostic, powered by the Hawkeye desktop app."
+    }
+  ],
+  "description": "Hawkeye AI Bridge: Almost instant local code and asset search for Claude."
+}

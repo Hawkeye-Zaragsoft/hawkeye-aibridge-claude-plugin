@@ -1,0 +1,1 @@
+{"query":"{{input.query}}","total_hits":4,"total_files":2,"results":[{"file":"D:/Project/Source/Player/PlayerController.cpp","lines":[1,45,120]},{"file":"D:/Project/Source/Player/PlayerController.h","lines":[12]}]}
