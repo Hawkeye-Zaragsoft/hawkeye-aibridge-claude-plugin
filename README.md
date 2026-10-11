@@ -17,11 +17,11 @@ This plugin bundles:
 ## Install
 
 ```
-claude plugin marketplace add Hawkeye-Zaragsoft/hawkeye-claude-plugin
+claude plugin marketplace add Hawkeye-Zaragsoft/hawkeye-aibridge-claude-plugin
 claude plugin install hawkeye-ai-bridge@hawkeye
 ```
 
-Or try it without installing: `claude --plugin-dir ./hawkeye-claude-plugin`
+Or try it without installing: `claude --plugin-dir ./hawkeye-aibridge-claude-plugin`
 
 Then run `/mcp` and confirm the `hawkeye` server is connected.
 

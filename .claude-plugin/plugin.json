@@ -8,7 +8,7 @@
     "url": "https://www.zaragsoft.se"
   },
   "homepage": "https://www.zaragsoft.se/aibridge",
-  "repository": "https://github.com/Hawkeye-Zaragsoft/hawkeye-claude-plugin",
+  "repository": "https://github.com/Hawkeye-Zaragsoft/hawkeye-aibridge-claude-plugin",
   "license": "SEE LICENSE IN LICENSE",
   "keywords": ["search", "code-search", "mcp", "unity", "unreal", "large-codebase", "local", "token-savings", "token-optimizer"],
   "userConfig": {
