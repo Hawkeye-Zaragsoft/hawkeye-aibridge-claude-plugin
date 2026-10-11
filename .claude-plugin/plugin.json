@@ -9,6 +9,10 @@
   },
   "homepage": "https://www.zaragsoft.se/aibridge",
   "repository": "https://github.com/Hawkeye-Zaragsoft/hawkeye-aibridge-claude-plugin",
+  "privacyPolicyUrl": "https://www.zaragsoft.se/privacy",
+  "supportUrl": "mailto:info@zaragsoft.se",
+  "documentationUrl": "https://github.com/Hawkeye-Zaragsoft/hawkeye-aibridge-claude-plugin#readme",
+  "termsOfServiceUrl": "https://github.com/Hawkeye-Zaragsoft/hawkeye-aibridge-claude-plugin/blob/main/LICENSE",
   "license": "SEE LICENSE IN LICENSE",
   "keywords": ["search", "code-search", "mcp", "unity", "unreal", "large-codebase", "local", "token-savings", "token-optimizer"],
   "userConfig": {
