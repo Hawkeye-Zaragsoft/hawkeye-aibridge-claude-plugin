@@ -24,8 +24,5 @@ SOFTWARE.
 
 APPLIES TO:
 - hawkeye-search SKILL.md (Claude skill prompt and definition)
-- SKILL.md parameter extraction and query handling
-- evals.json (test cases)
-- plugin.json (skill metadata)
 
 For proprietary backend licensing, see LICENSE file.
